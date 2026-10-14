@@ -1,0 +1,7 @@
+# Keep text files LF in the repository and on checkout, so skills behave the same on every platform.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.pdf binary
+*.zip binary

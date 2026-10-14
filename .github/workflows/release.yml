@@ -1,0 +1,29 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7  # v10.2.0
+        with:
+          enable-cache: false
+      - name: Skill package checks
+        run: uv run tests/test_skill_package.py
+      - name: Library tests
+        run: uv run skills/textbook2agent/book2library/scripts/test_textbook_library.py
+      - name: paper2skill engine tests
+        run: uv run skills/textbook2agent/book2library/scripts/paper2skill/test_paper_bundle.py
+      - name: Build the skill ZIP
+        run: bash .github/scripts/package_skill.sh "${GITHUB_REF_NAME}" dist
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${GITHUB_REF_NAME}" "dist/textbook2agent-${GITHUB_REF_NAME}.zip" --generate-notes --verify-tag

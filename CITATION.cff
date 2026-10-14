@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: "If you use Textbook2Agent, please cite it as below, and cite Paper2Agent, on which it builds."
+title: "Textbook2Agent: self-study agents built from textbooks"
+type: software
+authors:
+  - family-names: Vo
+    given-names: Huynh Quang Nguyen
+    affiliation: Oklahoma State University
+version: 0.1.0
+date-released: "2026-10-14"
+license: MIT
+repository-code: "https://github.com/vohuynhquangnguyen/textbook2agent"
+keywords:
+  - agent skills
+  - self-study
+  - textbooks
+  - Claude Code
+  - mathematics education
+references:
+  - type: article
+    title: "Reimagining research papers as interactive and reliable AI agents"
+    authors:
+      - family-names: Miao
+        given-names: Jiacheng
+      - family-names: Davis
+        given-names: Joe R.
+      - family-names: Zhang
+        given-names: Yaohui
+      - family-names: Pritchard
+        given-names: Jonathan K.
+      - family-names: Zou
+        given-names: James
+    journal: Nature
+    year: 2026
+    doi: 10.1038/s41586-026-11044-y
+  - type: software
+    title: Paper2Agent
+    authors:
+      - family-names: Miao
+        given-names: Jiacheng
+    repository-code: "https://github.com/jmiao24/Paper2Agent"
+    license: MIT

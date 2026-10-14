@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# Build output
+dist/
+*.zip
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Study material must never be published: textbook PDFs and study workspaces.
+*.pdf
+library-plan.json
+statements.csv
+library/
+bank/
+.work/
+.tutor/

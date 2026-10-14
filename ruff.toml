@@ -1,0 +1,7 @@
+line-length = 120
+target-version = "py311"
+# Paper2Agent's engine is kept byte-for-byte unchanged, so it is not linted here.
+extend-exclude = ["skills/textbook2agent/book2library/scripts/paper2skill"]
+
+[lint]
+select = ["E", "F", "W", "B", "UP"]
