@@ -25,6 +25,7 @@ and keep the learner's state so the next session continues where this one stoppe
 | Exercise, proof, or the learner's attempt to review | [exercises.md](references/exercises.md) |
 | Checking any proof, solution, counterexample or transcription | [verification.md](references/verification.md) |
 | Algorithm implementation or experiment | [book2lab](../book2lab/SKILL.md) |
+| Animation of a concept, proof idea or algorithm | [visualize](../visualize/SKILL.md) |
 
 ## Quote the books through the statement bank
 

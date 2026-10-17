@@ -24,6 +24,8 @@ Teach in chunks and pause for the learner's answers, unless the profile asks for
    and end with a check. Use the profile's application domain when it fits naturally (for example defect counts
    and process variation in manufacturing, returns and risk in finance, dosages in pharmacology); use plain
    numbers otherwise. Never bend the mathematics to fit the story. Compute nontrivial numbers with code.
+   When the mechanism is easier to see than to read (a limit, an area, a geometric picture, an iteration) and
+   the profile asks for animations, build a short one with [visualize](../../visualize/SKILL.md) and show it here.
 5. **Results.** Quote each statement from the bank. Give the proof idea in two or three sentences, then the
    proof at the depth the profile asks for, marking where each hypothesis is used.
 6. **Across the books.** How the parallel reading treats the same idea: a different definition (from the concept

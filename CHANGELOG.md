@@ -6,6 +6,17 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- `visualize` component: Manim animations for concepts, proof ideas and algorithms. A storyboard template, a
+  shared scene kit (colour-blind-safe palette, beats as sections, captions that break only where the author
+  writes `\\`), a render script that saves one video
+  and one frame sheet per beat, a Manim guide with per-platform install steps, and verification rules for
+  on-screen claims and misleading visuals.
+- Two worked animations with checked numbers: sin(x)/x is not in L¹ but its improper integral converges, and
+  Gauss–Newton for linear regression.
+- The tutor, book2lab, learner profile and router now point to visualize.
+
 ## [0.1.0] - 2026-10-14
 
 ### Added

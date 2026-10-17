@@ -22,6 +22,7 @@ project; see `CITATION.cff`.
 ## Runtime dependencies
 
 Installed by `uv` from PyPI when the scripts run; not redistributed here:
-PyMuPDF and pymupdf4llm (AGPL-3.0 or commercial license, Artifex), pypdf (BSD-3-Clause), Pillow (MIT-CMU).
+PyMuPDF and pymupdf4llm (AGPL-3.0 or commercial license, Artifex), pypdf (BSD-3-Clause), Pillow (MIT-CMU);
+for animations, Manim Community (MIT), PyAV (BSD-3-Clause), NumPy, SciPy and contourpy (BSD-3-Clause).
 PyMuPDF's AGPL terms apply to anyone who distributes software that includes it, or offers a modified version of it
 to users over a network (AGPL-3.0 section 13).

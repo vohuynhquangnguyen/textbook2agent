@@ -4,8 +4,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 Textbook2Agent is an agent skill for self-studying a topic from a list of textbooks. It turns your PDFs into one
-searchable library with printed-page citations, plans a route through the books, and tutors you along it. Every
-proof, solution and quoted definition the agent writes goes to a fresh verifier agent before you see it as correct.
+searchable library with printed-page citations, plans a route through the books, tutors you along it, and can
+animate a concept with [Manim](https://www.manim.community/). Every proof, solution and quoted definition the agent
+writes goes to a fresh verifier agent before you see it as correct.
 
 It adapts [Paper2Agent](https://github.com/jmiao24/Paper2Agent), which turns a research paper into a reading skill
 and its code into tested tools, from one paper to several textbooks.
@@ -17,6 +18,7 @@ flowchart LR
     syllabus --> tutor["tutor<br/>lessons, hints, proofs,<br/>spaced review"]
     tutor <--> verifier["fresh verifier<br/>agents"]
     tutor --> lab["book2lab<br/>algorithms tested against<br/>the book's examples"]
+    tutor --> visualize["visualize<br/>Manim animations with<br/>checked numbers"]
 ```
 
 | Component | What it does | Adapted from |
@@ -25,6 +27,7 @@ flowchart LR
 | **syllabus** | Maps where each concept is defined in each book, flags books that define the same word differently, and orders the material into modules, each with readings, exercises, a checkpoint and the results you may cite. | — |
 | **tutor** | Lessons built up from foundations with numerical worked examples; exercises as staged hints, your attempt, then a full proof (optionally listing every definition used); review of your own proofs; progress tracking with spaced review. | — |
 | **book2lab** | Implements algorithms from the books and tests them against the numbers the books print, then runs experiments that check the theory (convergence, error bounds, sensitivity). | paper2mcp |
+| **visualize** | Turns a concept, proof idea or algorithm into a short Manim animation: a storyboard tied to the proof steps, every number computed and checked in code, frames reviewed, and every on-screen claim verified. Videos split into beats, so an exercise hint can be released one beat at a time. Two worked examples are included (below). | — |
 
 ## Install
 
@@ -65,6 +68,9 @@ where your plan supports custom skills.
 - Python 3.11 or newer and [uv](https://docs.astral.sh/uv/). The scripts declare their pinned dependencies, and
   `uv run` installs them on first use.
 - [Tesseract](https://github.com/tesseract-ocr/tesseract), only for scanned books.
+- For animations only: a LaTeX distribution with `dvisvgm` (MiKTeX or TeX Live), and on macOS and Linux the Cairo
+  (and on Linux also Pango) development libraries. See the
+  [Manim guide](skills/textbook2agent/visualize/references/manim-guide.md) for per-platform steps.
 - About 0.7 MB of disk per book page for the working files. A 400-page book drafts in about four minutes.
 - On Windows, keep the study folder path short (for example `C:\study\analysis`).
 
@@ -86,6 +92,26 @@ Continue my <topic> study in <workspace>.
 Give me hints for <book> exercise 2A.4. I'll attempt it first.
 Review my proof in <file> using only <book> up to §2C.
 Implement <book> Algorithm 2.3 and check its convergence rate.
+Animate why sin(x)/x is not in L^1 but its improper integral converges.
+```
+
+### Example animations
+
+Both examples ship with their storyboard, the code that computes and checks every number on screen, and the scene:
+
+- [sin(x)/x is not in L¹(ℝ), yet its improper integral converges](skills/textbook2agent/visualize/examples/sinc-improper-integral/):
+  humps, the harmonic lower bound, divergence on a log scale, the alternating series, and the limit through all
+  real T.
+- [Gauss–Newton for linear regression](skills/textbook2agent/visualize/examples/gauss-newton-linear-regression/):
+  linearize, solve, update; one step to the least-squares fit in parameter space; why (the model is exact);
+  gradient descent crawling along a badly conditioned valley; and a nonlinear model that needs several steps.
+
+Render one yourself:
+
+```bash
+uv run skills/textbook2agent/visualize/scripts/render_scene.py \
+  skills/textbook2agent/visualize/examples/gauss-newton-linear-regression/scene.py GaussNewtonLinearRegression \
+  --quality preview
 ```
 
 The skill keeps everything in the study workspace, so the next session continues where the last one stopped:
@@ -97,7 +123,7 @@ The skill keeps everything in the study workspace, so the next session continues
 ├── library/            the generated library: catalog, statement index, chapter texts
 ├── plan/               concept map and syllabus
 ├── bank/               definitions and theorems copied from page images and verified
-├── lessons/ sessions/ exercises/ lab/
+├── lessons/ sessions/ exercises/ lab/ visuals/
 ├── progress.md         modules, confidence per concept, review dates, misconceptions
 └── .tutor/ .work/      prepared answers kept out of sight, and extraction evidence
 ```
@@ -143,6 +169,7 @@ skills/textbook2agent/            the skill (this folder is what gets installed)
 ├── SKILL.md                      router: which component handles a request
 ├── book2library/                 library builder (scripts/, templates/, references/)
 │   └── scripts/paper2skill/      Paper2Agent's extraction engine, unchanged
+├── visualize/                    Manim scene kit, render script, guide and two worked examples
 └── syllabus/  tutor/  book2lab/
 tests/test_skill_package.py       skill metadata and link checks
 .github/                          CI, release workflow and the packaging script
@@ -154,8 +181,12 @@ Run the checks (the same ones CI runs):
 uv run tests/test_skill_package.py
 uv run skills/textbook2agent/book2library/scripts/test_textbook_library.py
 uv run skills/textbook2agent/book2library/scripts/paper2skill/test_paper_bundle.py
+uv run skills/textbook2agent/visualize/scripts/test_visualize.py
 uvx ruff@0.16.10 check
 ```
+
+`test_visualize.py` also renders a tiny scene end to end when `TEXTBOOK2AGENT_RENDER_TESTS=1` is set and LaTeX is
+installed; CI runs it without that variable.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for conventions. To publish a release, push a tag such as `v0.1.0`; the
 release workflow attaches `textbook2agent-v0.1.0.zip`, ready for upload as a skill.

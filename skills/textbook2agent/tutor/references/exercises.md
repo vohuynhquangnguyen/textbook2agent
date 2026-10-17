@@ -44,6 +44,9 @@ Release one level at a time and invite an attempt after each. Record which level
    construction, a counting argument) and why it fits. Point to an analogous example or result in the readings.
 3. **Key step.** The crucial construction, lemma or inequality, still leaving the argument to the learner.
 
+An animation made with [visualize](../../visualize/SKILL.md) can serve as a hint: give each beat a hint level and
+release only the section videos up to the level reached.
+
 Add a small numerical illustration to a hint when it makes the idea concrete — test the claim on a specific set,
 sequence, function or matrix — and check its numbers with code. The illustration must not give the proof away.
 A hint is a claim too: if a hint asserts a lemma or an inequality, it is verified with the solution.

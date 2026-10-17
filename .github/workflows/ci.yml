@@ -45,6 +45,8 @@ jobs:
         run: uv run tests/test_skill_package.py
       - name: Library tests
         run: uv run skills/textbook2agent/book2library/scripts/test_textbook_library.py
+      - name: Visualize tests
+        run: uv run skills/textbook2agent/visualize/scripts/test_visualize.py
 
   engine:
     # Paper2Agent's own tests for the unchanged extraction engine.

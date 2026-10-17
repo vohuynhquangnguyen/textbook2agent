@@ -17,11 +17,13 @@ You need Python 3.11+ and [uv](https://docs.astral.sh/uv/). From the repository 
 uv run tests/test_skill_package.py                                           # SKILL.md metadata and links
 uv run skills/textbook2agent/book2library/scripts/test_textbook_library.py   # library scripts
 uv run skills/textbook2agent/book2library/scripts/paper2skill/test_paper_bundle.py   # vendored engine
+uv run skills/textbook2agent/visualize/scripts/test_visualize.py             # animations (set TEXTBOOK2AGENT_RENDER_TESTS=1 to render)
 uvx ruff@0.16.10 check                                                       # lint
 ```
 
 CI runs these checks for every push and pull request: lint, packaging and the engine's own tests on Ubuntu, and
-the package and library tests on both Ubuntu and Windows (the library tests drive the engine end to end).
+the package, library and visualize tests on both Ubuntu and Windows (the library tests drive the engine end to
+end). The Manim render test needs LaTeX and runs only locally.
 
 ## Where things go
 
@@ -30,6 +32,10 @@ the package and library tests on both Ubuntu and Windows (the library tests driv
 - Library scripts live in `skills/textbook2agent/book2library/scripts/`. `textbook_library.py` is the command
   line; each other module has one job (outline planning, the plan file, PDF access, the engine runner, the
   catalog, the adjudicator).
+- Animations live in `skills/textbook2agent/visualize/`: `scripts/scene_kit.py` (shared look and beats, with
+  caption text prepared by `scripts/caption_markup.py`),
+  `scripts/render_scene.py` (render and frame sheets) and `examples/`. Every example keeps its numbers and claim
+  checks in `quantities.py`; the visualize tests run those checks.
 - `scripts/paper2skill/` and `references/paper2skill/` are Paper2Agent files kept unchanged. Call the engine only
   through `bundle_runner.py`. To update them, copy the newer upstream files, record the commit in
   `scripts/paper2skill/README.md` and `THIRD_PARTY_NOTICES.md`, and run every test.

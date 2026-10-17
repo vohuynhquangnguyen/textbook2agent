@@ -24,3 +24,6 @@ library/
 bank/
 .work/
 .tutor/
+# Rendered animations and Manim caches
+render/
+media/

@@ -43,7 +43,8 @@ lab/
    the bank), fix seeds, record a results table or figure, and compare with the prediction: measured versus
    theoretical convergence order, tightness of an error bound, sensitivity to perturbed or noisy inputs (for
    instance, noise models from the learner's own field). Write the conclusion in the experiment's
-   README, including where the theory and the measurements disagree.
+   README, including where the theory and the measurements disagree. To show the iteration or the measured
+   rates as an animation, hand the computed results to [visualize](../visualize/SKILL.md).
 7. **Record.** Summarise in the session note and count lab results as evidence in `progress.md`.
 
 ## Running

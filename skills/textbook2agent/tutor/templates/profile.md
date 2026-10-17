@@ -22,6 +22,7 @@ request always overrides it.
 - Worked examples: <numerical, textbook style, step by step; how many per concept>
 - Application domain for examples: <e.g. manufacturing | finance | biology | none> (used only where it fits naturally)
 - Lesson delivery: <interactive, pausing for my answers | complete notes in one go>
+- Animations (Manim): <when a mechanism is easier to see than read | only on request | never>
 
 ## Exercises
 
